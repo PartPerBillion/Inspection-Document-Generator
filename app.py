@@ -51,7 +51,7 @@ rcfbutton = st.button('Submit Result and conclusion',type='primary')
 if not rcfbutton:
     rbutton = st.button('Add result')
     if rbutton:
-        point = st.text_input('type here:','- add a point')
+        point = st.text_input('type here:')
         text_list.append(point)
         print(text_list)
 else:
