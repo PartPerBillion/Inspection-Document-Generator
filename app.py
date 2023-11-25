@@ -80,7 +80,7 @@ w = st.file_uploader("Upload Towershell nominal thickness and height details fil
 st.subheader('Scanning location and orientation details',divider='blue')
 e = st.file_uploader("Upload Scanning location and orientation details file:", accept_multiple_files=False)
 st.subheader('Shellwise inspection summary',divider='blue')
-r = st.file_uploader("Upload Shellwise inspection summary file:", accept_multiple_files=True)
+r = st.file_uploader("Upload Shellwise inspection summary files:", accept_multiple_files=True)
 st.subheader('Tower drawings and scanning location',divider='red')
 t = st.file_uploader("Upload Tower drawings and scanning location pictures:", accept_multiple_files=True)
 st.subheader('Shell plate pictures',divider='red')
