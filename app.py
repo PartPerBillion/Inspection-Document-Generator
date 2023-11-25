@@ -2,7 +2,7 @@ import streamlit as st
 # import docx
 # import os
 # from PIL import Image
-import numpy as np
+# import numpy as np
 import pandas as pd
 # import matplotlib.pyplot as plt
 from datetime import date
@@ -22,8 +22,6 @@ c3,c4 = st.columns([4,1])
 client_location = c3.text_input("Client location:")
 unit_number = c4.number_input('Unit number:',min_value = 0)
 uploaded_image = st.file_uploader("Upload Client logo:", accept_multiple_files=False)
-# st.divider()
-
 # inspection
 st.subheader('Inspection', divider='green')
 c5,c6 = st.columns([4,1])
@@ -33,15 +31,13 @@ inspection_type = c5.text_input('Inspection type:')
 c7,c8 = st.columns([4,1])
 equipment_name = c7.text_input('Equipment name:')
 tag_number = c8.number_input('Tag number:',min_value = 0)
-# st.divider()
-
 # Prepared by
 st.subheader('Authors', divider='green')
 df = pd.DataFrame(
     [
-       {"Date": date.today(), "Designation": "Prepared by", "Name": 'Srihari'},
-       {"Date": date.today(), "Designation": "Reviewed by", "Name": 'Kasi'},
-       {"Date": date.today(), "Designation": 'Approved By', "Name": "Dharmaraj"},
+       {"Date": date.today(),'Job':"Prepared by", "Designation": 'NDT Technician', "Name": 'Sakthivel'},
+       {"Date": date.today(),'Job': "Reviewed by", "Designation": 'NDT Technician', "Name": 'Kasi'},
+       {"Date": date.today(),'Job':'Approved By', "Designation": 'Managing Director', "Name": "Dharmaraj"},
    ]
 )
 edited_df = st.data_editor(df,hide_index=True,use_container_width=True)
@@ -49,7 +45,6 @@ st.divider()
 
 # Content
 st.header('Summary', divider='rainbow')
-
 st.subheader('Result and conclusion', divider='green')
 text_list=[]
 rcfbutton = st.button('Submit Result and conclusion',type='primary')
@@ -62,8 +57,6 @@ if not rcfbutton:
 else:
     st.write('Completed Result and conclusion')
 st.text_area(f'Result and conclusion:')
-
-
 st.subheader('Site observation', divider='green')
 sofbutton = st.button('Submit Site observation',type='primary')
 if not sofbutton:
@@ -78,6 +71,7 @@ else:
 st.text_area(f'Site observation:')
 st.divider()
 
+# Upload files
 st.header('Upload files', divider='rainbow')
 st.subheader('Overall Inspection Summary',divider='blue')
 q = st.file_uploader("Upload Overall Inspection Summary file:", accept_multiple_files=False)
@@ -94,6 +88,7 @@ y = st.file_uploader("Upload Shell plate pictures:", accept_multiple_files=True)
 st.subheader('Detailed reports',divider='blue')
 u = st.file_uploader("Upload detailed report files:", accept_multiple_files=True)
 st.divider()
+
 # Download the document
 st.button('Generate Report')
 # st.download_button("Generate report" , data=open(filename, "rb").read(), file_name=filename, mime="application/octet-stream")
