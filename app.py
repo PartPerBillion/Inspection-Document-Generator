@@ -1,5 +1,5 @@
 import streamlit as st
-# import docx
+import docx
 # import os
 # from PIL import Image
 # import numpy as np
