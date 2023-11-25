@@ -1,7 +1,7 @@
 import streamlit as st
-import docx
-import os
-from PIL import Image
+# import docx
+# import os
+# from PIL import Image
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
