@@ -12,9 +12,9 @@ from datetime import date
 st.title("Inspection Report Generator")
 
 # Get input from the user
-st.header('Info', divider='rainbow')
+st.header('Info', divider='violet')
 # client
-st.subheader('Client', divider='green')
+st.subheader('Client')#, divider='green')
 c1,c2 = st.columns([4,1])
 client_name = c1.text_input("Client name:")
 report_number = c2.number_input('Report number:',min_value = 0)
@@ -23,16 +23,16 @@ client_location = c3.text_input("Client location:")
 unit_number = c4.number_input('Unit number:',min_value = 0)
 uploaded_image = st.file_uploader("Upload Client logo:", accept_multiple_files=False)
 # inspection
-st.subheader('Inspection', divider='green')
+st.subheader('Inspection')#, divider='green')
 c5,c6 = st.columns([4,1])
 inspection_date = c6.date_input('Inspection date:')
 inspection_type = c5.text_input('Inspection type:')
-# st.subheader('Equipment', divider='green')
+# st.subheader('Equipment')#, divider='green')
 c7,c8 = st.columns([4,1])
 equipment_name = c7.text_input('Equipment name:')
 tag_number = c8.number_input('Tag number:',min_value = 0)
 # Prepared by
-st.subheader('Authors', divider='green')
+st.subheader('Authors')#, divider='green')
 df = pd.DataFrame(
     [
        {"Date": date.today(),'Job':"Prepared by", "Designation": 'NDT Technician', "Name": 'Sakthivel'},
@@ -44,10 +44,10 @@ edited_df = st.data_editor(df,hide_index=True,use_container_width=True)
 st.divider()
 
 # Content
-st.header('Summary', divider='rainbow')
-st.subheader('Result and conclusion', divider='green')
+st.header('Summary', divider='violet')
+st.subheader('Result and conclusion')#, divider='green')
 text_list=[]
-rcfbutton = st.button('Submit Result and conclusion',type='primary')
+rcfbutton = st.button('Submit Result and conclusion',type='secondary')
 if not rcfbutton:
     rbutton = st.button('Add result')
     if rbutton:
@@ -57,8 +57,8 @@ if not rcfbutton:
 else:
     st.write('Completed Result and conclusion')
 st.text_area(f'Result and conclusion:')
-st.subheader('Site observation', divider='green')
-sofbutton = st.button('Submit Site observation',type='primary')
+st.subheader('Site observation')#, divider='green')
+sofbutton = st.button('Submit Site observation',type='secondary')
 if not sofbutton:
     c9,c10,c11 = st.columns([1,1,1])
     hbutton = c9.button('Add heading')
@@ -72,20 +72,20 @@ st.text_area(f'Site observation:')
 st.divider()
 
 # Upload files
-st.header('Upload files', divider='rainbow')
-st.subheader('Overall Inspection Summary',divider='blue')
+st.header('Upload files', divider='violet')
+st.subheader('Overall Inspection Summary')#,divider='blue')
 q = st.file_uploader("Upload Overall Inspection Summary file:", accept_multiple_files=False)
-st.subheader('Towershell nominal thickness and height details',divider='blue')
+st.subheader('Towershell nominal thickness and height details')#,divider='blue')
 w = st.file_uploader("Upload Towershell nominal thickness and height details file:", accept_multiple_files=False)
-st.subheader('Scanning location and orientation details',divider='blue')
+st.subheader('Scanning location and orientation details')#,divider='blue')
 e = st.file_uploader("Upload Scanning location and orientation details file:", accept_multiple_files=False)
-st.subheader('Shellwise inspection summary',divider='blue')
+st.subheader('Shellwise inspection summary')#,divider='blue')
 r = st.file_uploader("Upload Shellwise inspection summary files:", accept_multiple_files=True)
-st.subheader('Tower drawings and scanning location',divider='red')
+st.subheader('Tower drawings and scanning location')#,divider='red')
 t = st.file_uploader("Upload Tower drawings and scanning location pictures:", accept_multiple_files=True)
-st.subheader('Shell plate pictures',divider='red')
+st.subheader('Shell plate pictures')#,divider='red')
 y = st.file_uploader("Upload Shell plate pictures:", accept_multiple_files=True)
-st.subheader('Detailed reports',divider='blue')
+st.subheader('Detailed reports')#,divider='blue')
 u = st.file_uploader("Upload detailed report files:", accept_multiple_files=True)
 st.divider()
 
