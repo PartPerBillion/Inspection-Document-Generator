@@ -37,9 +37,9 @@ tag_number = c8.number_input('Tag number:',min_value = 0)
 st.subheader(':grey[Authors]')#, divider='grey')
 df = pd.DataFrame(
     [
-       {"Date": date.today(),'Job':"Prepared by", "Designation": 'NDT Technician', "Name": 'Sakthivel', 'Signature':''},
-       {"Date": date.today(),'Job': "Reviewed by", "Designation": 'NDT Technician', "Name": 'Kasi', 'Signature':''},
-       {"Date": date.today(),'Job':'Approved By', "Designation": 'Managing Director', "Name": "Dharmaraj", 'Signature':''},
+       {"Date": date.today(),'Job':"Prepared by", "Designation": 'NDT Technician', "Name": 'M.Sakthivel', 'Signature':''},
+       {"Date": date.today(),'Job': "Reviewed by", "Designation": 'NDT Technician', "Name": 'T.Kasirajan', 'Signature':''},
+       {"Date": date.today(),'Job':'Approved By', "Designation": 'Managing Director', "Name": "M.Dharmaraj", 'Signature':''},
    ]
 )
 edited_df = st.data_editor(df,hide_index=True,use_container_width=True)
