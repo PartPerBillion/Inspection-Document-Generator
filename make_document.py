@@ -236,7 +236,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
     if overall_summary is not None:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Overall Summary',1)
-        overall_summary_df = pd.read_csv(overall_summary)
+        overall_summary_df = pd.read_csv(overall_summary,encoding='utf-8')
         add_table_to_document(overall_summary_df,doc)
 
     if thickness_details is not None:
