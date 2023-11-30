@@ -52,13 +52,13 @@ $ Sub-heading
 # Upload files
 st.header(':blue[Upload files]', divider='violet')
 st.subheader(':grey[Overall Inspection Summary]')#,divider='blue')
-overall_summary = st.file_uploader("Upload Overall Inspection Summary file:", type=['csv','xlsx'], accept_multiple_files=False)
+overall_summary = st.file_uploader("Upload Overall Inspection Summary file:", type=['csv'], accept_multiple_files=False)
 st.subheader(':grey[Towershell nominal thickness and height details]')#,divider='blue')
-thickness_details = st.file_uploader("Upload Towershell nominal thickness and height details file:", type=['csv','xlsx'], accept_multiple_files=False)
+thickness_details = st.file_uploader("Upload Towershell nominal thickness and height details file:", type=['csv'], accept_multiple_files=False)
 st.subheader(':grey[Scanning location and orientation details]')#,divider='blue')
-scanning_details = st.file_uploader("Upload Scanning location and orientation details file:", type=['csv','xlsx'], accept_multiple_files=False)
+scanning_details = st.file_uploader("Upload Scanning location and orientation details file:", type=['csv'], accept_multiple_files=False)
 st.subheader(':grey[Shellwise inspection summary]')#,divider='blue')
-shellwise_inspection = st.file_uploader("Upload Shellwise inspection summary files:", type=['csv','xlsx'], accept_multiple_files=True)
+shellwise_inspection = st.file_uploader("Upload Shellwise inspection summary files:", type=['csv'], accept_multiple_files=True)
 st.subheader(':grey[Tower drawings and scanning location]')#,divider='red')
 tower_drawing = st.file_uploader("Upload Tower drawings and scanning location pictures:", type=['png','jpeg','jpg'], accept_multiple_files=True)
 if tower_drawing is not None:
@@ -69,7 +69,7 @@ shell_plate_pics = st.file_uploader("Upload Shell plate pictures:", type=['png',
 if shell_plate_pics is not None:
     st.image(shell_plate_pics,width=233)
 st.subheader(':grey[Detailed reports]')
-detailed_report = st.file_uploader("Upload detailed report files:", type=['csv','xlsx'], accept_multiple_files=True)
+detailed_report = st.file_uploader("Upload detailed report files:", type=['csv'], accept_multiple_files=True)
 st.divider()
 
 filename = f"{client_name}-{report_number}.docx"
