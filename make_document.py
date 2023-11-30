@@ -140,7 +140,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
     format = p.paragraph_format
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(rf'Logo\ArunTech.jpg', width=Inches(.7))
+    # run.add_picture(rf'Logo\ArunTech.jpg', width=Inches(.7))
 
     p = hdr_cells[1].paragraphs[0] 
     format = p.paragraph_format
@@ -151,7 +151,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
     format = p.paragraph_format
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(rf'Logo\HP.png', width=Inches(1.4))
+    # run.add_picture(rf'Logo\HP.png', width=Inches(1.4))
     table.style = 'Table Grid'
 
     p = header.add_paragraph()
@@ -204,7 +204,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
     format = p.paragraph_format
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(rf'Logo\ArunTech.jpg', width=Inches(.7))
+    # run.add_picture(rf'Logo\ArunTech.jpg', width=Inches(.7))
 
     p = hdr_cells[1].paragraphs[0] 
     format = p.paragraph_format
@@ -215,7 +215,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
     format = p.paragraph_format
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(rf'Logo\HP.png', width=Inches(1.4))
+    # run.add_picture(rf'Logo\HP.png', width=Inches(1.4))
     table.style = 'Table Grid'
 
     p = header.add_paragraph()
