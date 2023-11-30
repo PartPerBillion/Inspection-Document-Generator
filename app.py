@@ -63,7 +63,7 @@ st.subheader(':grey[Tower drawings and scanning location]')#,divider='red')
 tower_drawing = st.file_uploader("Upload Tower drawings and scanning location pictures:", type=['png','jpeg','jpg'], accept_multiple_files=True)
 if tower_drawing is not None:
     st.image(tower_drawing,width=233)
-st.subheader(':grey[Detailed reports]')
+# st.subheader(':grey[Detailed reports]')
 st.subheader(':grey[Shell plate pictures]')#,divider='red')
 shell_plate_pics = st.file_uploader("Upload Shell plate pictures:", type=['png','jpeg','jpg'], accept_multiple_files=True)
 if shell_plate_pics is not None:
