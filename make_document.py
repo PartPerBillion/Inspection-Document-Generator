@@ -233,25 +233,25 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
     doc.add_heading(f'{hn} Site observation',1)
     add_site_observation_to_doc(site_observation,doc,hn)
 
-    if overall_summary is not None:
+    if overall_summary is not None and len(overall_summary)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Overall Summary',1)
         overall_summary_df = pd.read_csv(overall_summary,encoding='utf-8')
         add_table_to_document(overall_summary_df,doc)
 
-    if thickness_details is not None:
+    if thickness_details is not None and len(thickness_details)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Thickness Details',1)
         overall_summary_df = pd.read_csv(thickness_details)
         add_table_to_document(overall_summary_df,doc)
     
-    if scanning_details is not None:
+    if scanning_details is not None and len(scanning_details)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Scanning Details',1)
         overall_summary_df = pd.read_csv(scanning_details)
         add_table_to_document(overall_summary_df,doc)
 
-    if shellwise_inspection is not None:
+    if shellwise_inspection is not None and len(shellwise_inspection)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Shellwise Inspection',1)
         for table in shellwise_inspection:
@@ -262,7 +262,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
             p.add_run(style = None)
             p.add_run(style = None)
 
-    if tower_drawing is not None:
+    if tower_drawing is not None and len(tower_drawing)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Tower Drawings',1)
         for pic in tower_drawing:
@@ -274,7 +274,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
             p.add_run(style = None)
             p.add_run(style = None)
 
-    if shell_plate_pics is not None:
+    if shell_plate_pics is not None and len(shell_plate_pics)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Shellplate Pictures',1)
         for pic in shell_plate_pics:
@@ -286,7 +286,7 @@ def make_inspection_document(client_name, client_location, unit_number, report_n
             p.add_run(style = None)
             p.add_run(style = None)
     
-    if detailed_report is not None:
+    if detailed_report is not None and len(detailed_report)>0:
         hn = ahn(hn,1)
         doc.add_heading(f'{hn} Detailed Report',1)
         for table in detailed_report:
