@@ -201,7 +201,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\ArunTech.jpg', width=Inches(.7))
+    run.add_picture(r'Files/Client/Logo/ArunTech.jpg', width=Inches(.7))
 
     p = hdr_cells[1].paragraphs[0] 
     format = p.paragraph_format
@@ -213,7 +213,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\HP.png', width=Inches(0.7))
+    run.add_picture(r'Files/Client/Logo/HP.png', width=Inches(0.7))
     table.style = 'Table Grid'
 
     p = header.add_paragraph()
@@ -276,7 +276,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\ArunTech.jpg', width=Inches(.7))
+    run.add_picture(r'Files/Client/Logo/ArunTech.jpg', width=Inches(.7))
 
     p = hdr_cells[1].paragraphs[0] 
     format = p.paragraph_format
@@ -289,7 +289,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
-    run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\HP.png', width=Inches(.7))
+    run.add_picture(r'Files/Client/Logo/HP.png', width=Inches(.7))
 
     sec_cells = table.rows[1].cells
     p = sec_cells[0].paragraphs[0] 
