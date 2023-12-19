@@ -198,7 +198,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     hdr_cells = table.rows[0].cells
     p = hdr_cells[0].paragraphs[0] 
     format = p.paragraph_format
-    format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
+    # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
     run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\ArunTech.jpg', width=Inches(.7))
@@ -210,7 +210,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     p = hdr_cells[2].paragraphs[0] 
     format = p.paragraph_format
-    format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
+    # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
     run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\HP.png', width=Inches(0.7))
@@ -273,7 +273,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     
     p = hdr_cells[0].paragraphs[0] 
     format = p.paragraph_format
-    format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
+    # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
     run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\ArunTech.jpg', width=Inches(.7))
@@ -286,7 +286,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     p = hdr_cells[2].paragraphs[0] 
     format = p.paragraph_format
-    format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
+    # format.vertical_alignment = docx.enum.table.WD_ALIGN_VERTICAL.CENTER
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     run = p.add_run()
     run.add_picture(r'E:\Works\GitHub\Inspection-Document-Generator\Files\Client\Logo\HP.png', width=Inches(.7))
