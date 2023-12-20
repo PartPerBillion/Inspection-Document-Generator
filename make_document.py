@@ -84,6 +84,60 @@ def add_site_observation_to_doc(string,doc,hn):
                     line_space(doc,1)
     return hn
 
+def add_inspection_details_to_doc(text_file,doc,hn):
+    rdict = {}
+    n=0
+    with open(text_file) as mytxt:
+        for i in mytxt:
+            if len(i)>0:
+                if i[0] == '#':
+                    rdict[f'{n}_h'] = i[2:]
+                elif i[0] == '$':
+                    rdict[f'{n}_s'] = i[2:]
+                elif i[0] == '^':
+                    rdict[f'{n}_t'] = i[2:].strip()
+                elif i[0] == '%':
+                    rdict[f'{n}_j'] = i[2:]
+                elif i[0] == '>':
+                    rdict[f'{n}_z'] = i[2:]
+                else:
+                    rdict[f'{n}_p'] = i
+            n+=1
+    for k,v in rdict.items():
+        if len(v)>0:
+            v = v.replace('\n','')
+            print(k,v)
+            if k[-1] == 'h':
+                hn = ahn(hn,1)
+                doc.add_heading(f'{hn}. {v}',1).bold = True
+                line_space(doc,1)
+            elif k[-1] == 's':
+                hn = ahn(hn,2)
+                doc.add_heading(f'{hn}. {v}',2)
+                line_space(doc,1)
+            elif k[-1] == 't':
+                table = pd.read_csv(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.csv')
+                add_table_to_document(table, doc)
+            elif k[-1] == 'j':
+                doc.add_picture(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.jpg')
+            elif k[-1] == 'z':
+                line_space(doc,1)
+                doc.add_paragraph(v)
+            else:
+                current_point = ''
+                line = v.strip()
+                if line.startswith('-'):
+                    if current_point:
+                        doc.add_paragraph(current_point.strip()[2:], style = 'List Bullet')
+                        line_space(doc,1)
+                        current_point =  ''
+                current_point += ' '+line
+                if current_point:
+                    doc.add_paragraph(current_point.strip()[2:], style = 'List Bullet')
+                    line_space(doc,1)
+    return hn
+
+
 def table_of_contents(document):
     paragraph = document.add_paragraph()
     run = paragraph.add_run()
@@ -135,18 +189,6 @@ def add_table_to_document(df, document, style = 'Table Grid'):
             for j, value in enumerate(row):
                 table.cell(i + 1, j).text = str(value)
 
-def update_docx_fields(doc):
-    try:
-        for field in doc.inline_shapes:
-            if field._inline.graphic.graphicData.xml.startswith('<w:drawing'):
-                # Update specific fields as needed, this example updates all date fields
-                if field._inline.graphic.graphicData.xml.startswith('<w:drawing><wp:docPr'):
-                    field.text = "New Date"  # Change the content to a new value
-        return doc
-    except Exception as e:
-        print(f"Error: {e}")
-    
-
 def add_points(x, doc):
     lines = x.split('\n')
     points = []
@@ -194,7 +236,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     section.page_height = Mm(297)
     section.page_width = Mm(210)
     header = section.first_page_header 
-    table = header.add_table(1, 3,width=Inches(8))
+    table = header.add_table(1, 3,width=Inches(7.2))
     hdr_cells = table.rows[0].cells
     p = hdr_cells[0].paragraphs[0] 
     format = p.paragraph_format
@@ -268,7 +310,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     section = doc.sections[0]
     header = section.header 
-    table = header.add_table(2, 3,width=Inches(8))
+    table = header.add_table(2, 3,width=Inches(7.2))
     hdr_cells = table.rows[0].cells
     
     p = hdr_cells[0].paragraphs[0] 
@@ -322,7 +364,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     doc = table_of_contents(doc)
     doc.add_page_break()
     hn = '1'
-    doc.add_heading(f'{hn}. Results and conclusion',1)
+    doc.add_heading(f'{hn}. Results and conclusion',1).bold = True
     line_space(doc,1)
 
     paragraph_format = doc.styles['List Bullet'].paragraph_format
@@ -332,14 +374,14 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     doc.add_page_break()
 
     hn = ahn(hn,1)
-    doc.add_heading(f'{hn}. Site observation',1)
+    doc.add_heading(f'{hn}. Site observation',1).bold = True
     line_space(doc,1)
     add_site_observation_to_doc(site_observation,doc,hn)
     doc.add_page_break()
 
     if bool(overall_summary)==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Overall Summary',1)
+        doc.add_heading(f'{hn}. Overall Summary',1).bold = True
         line_space(doc,1)
         overall_summary_df = pd.read_csv(overall_summary,encoding='utf-8')
         add_table_to_document(overall_summary_df,doc)
@@ -347,7 +389,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     if bool(thickness_details)==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Thickness Details',1)
+        doc.add_heading(f'{hn}. Thickness Details',1).bold = True
         line_space(doc,1)
         overall_summary_df = pd.read_csv(thickness_details)
         add_table_to_document(overall_summary_df,doc)
@@ -355,7 +397,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     if bool(scanning_details)==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Scanning Details',1)
+        doc.add_heading(f'{hn}. Scanning Details',1).bold = True
         line_space(doc,1)
         overall_summary_df = pd.read_csv(scanning_details)
         add_table_to_document(overall_summary_df,doc)
@@ -363,7 +405,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     if bool(shellwise_inspection)==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Shellwise Inspection',1)
+        doc.add_heading(f'{hn}. Shellwise Inspection',1).bold = True
         line_space(doc,1)
         for table in shellwise_inspection:
             overall_summary_df = pd.read_csv(table)
@@ -376,7 +418,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     if bool(tower_drawing)==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Tower Drawings',1)
+        doc.add_heading(f'{hn}. Tower Drawings',1).bold = True
         line_space(doc,1)
         for pic in tower_drawing:
             image = Image.open(pic)
@@ -390,7 +432,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
 
     if bool(shell_plate_pics)==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Shellplate Pictures',1)
+        doc.add_heading(f'{hn}. Shellplate Pictures',1).bold = True
         line_space(doc,1)
         for pic in shell_plate_pics:
             image = Image.open(pic)
@@ -404,7 +446,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     
     if bool(list(detailed_report.values())[0])==True:
         hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Detailed Report',1)
+        doc.add_heading(f'{hn}. Detailed Report',1).bold = True
         for k,v in detailed_report.items():
             hn = ahn(hn,2)
             doc.add_heading(f'{hn}. {k}',2)
@@ -417,5 +459,6 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
                 p.add_run(style = None)
                 p.add_run(style = None)
 
-    doc = update_docx_fields(doc)
+    add_inspection_details_to_doc(rf'Files\Inspection\{inspection_type}\text.txt',doc,hn)
+
     return doc
