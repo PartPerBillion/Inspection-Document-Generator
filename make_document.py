@@ -106,7 +106,6 @@ def add_inspection_details_to_doc(text_file,doc,hn):
     for k,v in rdict.items():
         if len(v)>0:
             v = v.replace('\n','')
-            print(k,v)
             if k[-1] == 'h':
                 hn = ahn(hn,1)
                 doc.add_heading(f'{hn}. {v}',1).bold = True
