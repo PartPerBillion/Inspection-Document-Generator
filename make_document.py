@@ -459,6 +459,6 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
                 p.add_run(style = None)
                 p.add_run(style = None)
 
-    add_inspection_details_to_doc(rf'Files\Inspection\{inspection_type}\text.txt',doc,hn)
+    add_inspection_details_to_doc(rf'Files/Inspection/{inspection_type}/text.txt',doc,hn)
 
     return doc
