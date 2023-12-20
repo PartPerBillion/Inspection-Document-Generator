@@ -30,7 +30,8 @@ st.subheader(':grey[Client]')#, divider='grey')
 c1,c2 = st.columns([4,1])   
 clients = tuple(data['Client'].unique().tolist())
 client_name = c1.selectbox('Client name:',clients)
-clientcode = ccode[ccode['Client']==client_name]['Code'][0]
+clientcode = ccode[ccode['Client']==client_name]['Code'].reset_index()
+clientcode = clientcode['Code'][0]
 client_code = c2.text_input('Client code:',clientcode)
 c3,c4 = st.columns([4,1])
 clientlocation = tuple(data[data['Client']==client_name]['Location'].unique().tolist())
