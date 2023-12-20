@@ -116,10 +116,10 @@ def add_inspection_details_to_doc(text_file,doc,hn):
                 doc.add_heading(f'{hn}. {v}',2)
                 line_space(doc,1)
             elif k[-1] == 't':
-                table = pd.read_csv(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.csv')
+                table = pd.read_csv(rf'Files/Inspection/TOWER INSPECTION BY ROBOTIC CRAWLER/{v}.csv')
                 add_table_to_document(table, doc)
             elif k[-1] == 'j':
-                doc.add_picture(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.jpg')
+                doc.add_picture(rf'Files/Inspection/TOWER INSPECTION BY ROBOTIC CRAWLER/{v}.jpg')
             elif k[-1] == 'z':
                 line_space(doc,1)
                 doc.add_paragraph(v)
