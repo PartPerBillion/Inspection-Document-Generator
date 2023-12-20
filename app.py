@@ -41,12 +41,13 @@ client_logo = st.file_uploader("Upload Client logo:", type=['png','jpeg','jpg'],
 # inspection
 st.subheader(':grey[Inspection]')#, divider='grey')
 c5,c6 = st.columns([4,1])
-inspection_date = c6.date_input('Inspection date:')
-inspection_type = c5.text_input('Inspection type:')
+equipment_name = c5.text_input('Equipment name:')
+tag_number = c6.text_input('Tag number:')
 # st.subheader('Equipment')#, divider='grey')
 c7,c8 = st.columns([4,1])
-equipment_name = c7.text_input('Equipment name:')
-tag_number = c8.text_input('Tag number:')
+inspection_date = c7.date_input('Inspection date:')
+inspection_type = c8.text_input('Inspection type:','TOWER INSPECTION BY ROBOTIC CRAWLER')
+
 # Prepared by
 st.subheader(':grey[Authors]')#, divider='grey')
 df = pd.DataFrame(
