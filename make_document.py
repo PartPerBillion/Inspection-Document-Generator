@@ -106,7 +106,6 @@ def add_inspection_details_to_doc(text_file,doc,hn):
     for k,v in rdict.items():
         if len(v)>0:
             v = v.replace('\n','')
-            print(k,v)
             if k[-1] == 'h':
                 hn = ahn(hn,1)
                 doc.add_heading(f'{hn}. {v}',1).bold = True
@@ -116,22 +115,24 @@ def add_inspection_details_to_doc(text_file,doc,hn):
                 doc.add_heading(f'{hn}. {v}',2)
                 line_space(doc,1)
             elif k[-1] == 't':
-                table = pd.read_csv(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.csv')
+                table = pd.read_csv(rf'E:\Works\GitHub\Inspection-Document-Generator\Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.csv')
                 add_table_to_document(table, doc)
             elif k[-1] == 'j':
-                doc.add_picture(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.jpg')
+                doc.add_picture(rf'E:\Works\GitHub\Inspection-Document-Generator\Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.jpg')
+                last_paragraph = doc.paragraphs[-1] 
+                last_paragraph.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
             elif k[-1] == 'z':
                 line_space(doc,1)
                 doc.add_paragraph(v)
             else:
-                current_point = ''
+                current_point = ""
                 line = v.strip()
                 if line.startswith('-'):
                     if current_point:
                         doc.add_paragraph(current_point.strip()[2:], style = 'List Bullet')
                         line_space(doc,1)
-                        current_point =  ''
-                current_point += ' '+line
+                        current_point =  ""
+                current_point += " "+line
                 if current_point:
                     doc.add_paragraph(current_point.strip()[2:], style = 'List Bullet')
                     line_space(doc,1)
@@ -206,7 +207,7 @@ def add_points(x, doc):
         doc.add_paragraph(i[2:],style = 'List Bullet')
         line_space(doc,1)
 
-def make_inspection_document(client_name, client_location, unit_number, client_code, inspection_date, equipment_name, tag_number, inspection_type, edited_df, result_and_conclusion, site_observation, overall_summary, thickness_details, scanning_details, shellwise_inspection, tower_drawing, shell_plate_pics, detailed_report):
+def make_inspection_document(client_name, client_location, unit_number, client_code, fpage_image, inspection_date, equipment_name, tag_number, inspection_type, edited_df, result_and_conclusion, site_observation, overall_summary, thickness_details, scanning_details, shellwise_inspection, tower_drawing, shell_plate_pics, detailed_report):
     # Create document
     doc = docx.Document()
     paragraph_format = doc.styles['Normal'].paragraph_format
@@ -223,6 +224,12 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     obj_charstyle = obj_styles.add_style('CommentsStyle', docx.enum.style.WD_STYLE_TYPE.CHARACTER)
     obj_font = obj_charstyle.font
     obj_font.size = Pt(16)
+    obj_font.name = 'Arial'
+
+    obj_styles = doc.styles
+    obj_charstyle = obj_styles.add_style('BigText', docx.enum.style.WD_STYLE_TYPE.CHARACTER)
+    obj_font = obj_charstyle.font
+    obj_font.size = Pt(24)
     obj_font.name = 'Arial'
 
     obj_styles = doc.styles
@@ -284,7 +291,7 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     p.add_run(f'{inspection_dateX}')
     # format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     
-    table_0.style = 'Colorful List'
+    table_0.style = 'Medium Shading 1 Accent 3'
 
     font.size = docx.shared.Pt(16)
     table_1 = doc.add_table(2,1)
@@ -296,16 +303,26 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
     format = p.paragraph_format
     format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
     p.add_run(f'{inspection_type}', style = 'CommentsStyle').bold = True
-    table_1.style = 'Colorful List'
+    table_1.style = 'Medium Shading 1 Accent 3'
     font.size = docx.shared.Pt(11)
-
-    line_space(doc,30)
+    line_space(doc,5)
+    if bool(fpage_image)==True:
+        # for pic in shell_plate_pics:
+        image = Image.open(fpage_image)
+        image.save(rf'Temp\img.png')
+        doc.add_picture(rf'Temp\img.png', height = Inches(4))
+    else:
+        doc.add_picture(rf'Files\Inspection\{inspection_type}\FrontPageImage.jpg', height = Inches(4))
+    last_paragraph = doc.paragraphs[-1] 
+    last_paragraph.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
+    line_space(doc,5)
     edited_df.to_csv(rf'Temp\authors.csv')
     authors = pd.read_csv(rf'Temp\authors.csv')
     authors['Date'] = pd.to_datetime(authors['Date'])
     authors['Date'] = authors['Date'].dt.strftime('%d-%m-%Y')
     authors.drop('Unnamed: 0', inplace=True, axis=1)
-    add_table_to_document(authors, doc, 'Colorful List')
+    add_table_to_document(authors, doc, 'Medium Shading 1 Accent 3')
+
     doc.add_page_break()
 
     section = doc.sections[0]
@@ -444,21 +461,31 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
             p.add_run(style = None)
         doc.add_page_break()
     
-    if bool(list(detailed_report.values())[0])==True:
-        hn = ahn(hn,1)
-        doc.add_heading(f'{hn}. Detailed Report',1).bold = True
-        for k,v in detailed_report.items():
-            hn = ahn(hn,2)
-            doc.add_heading(f'{hn}. {k}',2)
-            line_space(doc,1)
-            for table in v:
-                overall_summary_df = pd.read_csv(table)
-                add_table_to_document(overall_summary_df,doc)
+    if len(detailed_report.keys())>0:
+        if bool(list(detailed_report.values())[0])==True:
+            hn = ahn(hn,1)
+            doc.add_heading(f'{hn}. Detailed Report',1).bold = True
+            for k,v in detailed_report.items():
+                hn = ahn(hn,2)
+                doc.add_heading(f'{hn}. {k}',2)
+                line_space(doc,15)
                 p = doc.add_paragraph()
-                p.style = None
-                p.add_run(style = None)
-                p.add_run(style = None)
-
-    add_inspection_details_to_doc(rf'Files\Inspection\{inspection_type}\text.txt',doc,hn)
+                p.add_run(f'{v[0]}', style = 'BigText').bold = True
+                format = p.paragraph_format
+                format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
+                # line_space(doc,1)
+                doc.add_page_break()
+                for table in v[1]:
+                    overall_summary_df = pd.read_csv(table)
+                    add_table_to_document(overall_summary_df,doc)
+                    p = doc.add_paragraph()
+                    p.style = None
+                    p.add_run(style = None)
+                    p.add_run(style = None)
+                    doc.add_page_break()
+    try:
+        add_inspection_details_to_doc(rf'Files\Inspection\{inspection_type}\text.txt',doc,hn)
+    except:
+        pass
 
     return doc

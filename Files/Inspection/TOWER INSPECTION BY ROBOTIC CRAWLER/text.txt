@@ -27,8 +27,8 @@ $ Scorpion Crawler
 $ Scorpion-2, B-Scan-Swift
 > With a large 26.4 cm (10.4 in) non-reflective, touch screen display, Swift-UT provides clear views under any lighting conditions.
 > It has a powerful integrated ultrasonic card and seamlessly works with the dedicated B-SCAN software. Setting up ultrasonic and inspection details has never been this easy.
-> Swift-UT is sealed and designed for IP65. Its magnesium alloy casing is tough, and is water and dust resistant. Combined with a 3mm (1/8 in) strengthened glass, it’s the perfect instrument for harsh environmental conditions.
-> Swift-UT comes with two lithium-ions, hot-swappable batteries, allowing for a full day’s work. 
+> Swift-UT is sealed and designed for IP65. Its magnesium alloy casing is tough, and is water and dust resistant. Combined with a 3mm (1/8 in) strengthened glass, it's the perfect instrument for harsh environmental conditions.
+> Swift-UT comes with two lithium-ions, hot-swappable batteries, allowing for a full day's work. 
 % 3
 > Swift-UT has an optional harness to support the use of the system for longer period of time. The adjustable stand, the top handle, and four corner anchor points make it practical for on-site inspections.
 # Calibration standard
