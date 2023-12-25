@@ -47,14 +47,12 @@ if fpage_image is not None:
 # inspection
 st.subheader(':grey[Inspection]')
 c5,c6 = st.columns([4,1])
-equipment_name = c5.text_input('Equipment name:')
-tag_number = c6.text_input('Tag number:')
-
-# st.subheader('Equipment')
+inspection_date = c6.date_input('Inspection date:')
+inspection_type = c5.text_input('Inspection type:')
+# st.subheader('Equipment')#, divider='grey')
 c7,c8 = st.columns([4,1])
-inspection_date = c8.date_input('Inspection date:')
-inspection_type = c7.text_input('Inspection type:', 'TOWER INSPECTION BY ROBOTIC CRAWLER')
-
+equipment_name = c7.text_input('Equipment name:')
+tag_number = c8.text_input('Tag number:')
 # Prepared by
 st.subheader(':grey[Authors]')
 df = pd.DataFrame(

@@ -4,7 +4,7 @@
 > The purpose of the inspection was to determine the integrity of the tower shell course by Scorpion-2 B-Scan as per API 653 and to monitor the general condition of the Final Absorption Tower (Tower No.402) of SAP-1 Unit against the general degradation due to the service conditions. 
 # Scope
 > Scorpion-2, B-Scan crawler inspection to be carried out the following:
-^ Scope
+^ SCOPE
 > Note: Inspection carried out from North in clockwise direction.
 # Personal Qualification and certification
 ^ PERSONAL QUALIFICATION AND CERTIFICATION

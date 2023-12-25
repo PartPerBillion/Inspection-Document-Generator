@@ -115,12 +115,10 @@ def add_inspection_details_to_doc(text_file,doc,hn):
                 doc.add_heading(f'{hn}. {v}',2)
                 line_space(doc,1)
             elif k[-1] == 't':
-                table = pd.read_csv(rf'E:\Works\GitHub\Inspection-Document-Generator\Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.csv')
+                table = pd.read_csv(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.csv')
                 add_table_to_document(table, doc)
             elif k[-1] == 'j':
-                doc.add_picture(rf'E:\Works\GitHub\Inspection-Document-Generator\Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.jpg')
-                last_paragraph = doc.paragraphs[-1] 
-                last_paragraph.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
+                doc.add_picture(rf'Files\Inspection\TOWER INSPECTION BY ROBOTIC CRAWLER\{v}.jpg')
             elif k[-1] == 'z':
                 line_space(doc,1)
                 doc.add_paragraph(v)
@@ -461,31 +459,21 @@ def make_inspection_document(client_name, client_location, unit_number, client_c
             p.add_run(style = None)
         doc.add_page_break()
     
-    if len(detailed_report.keys())>0:
-        if bool(list(detailed_report.values())[0])==True:
-            hn = ahn(hn,1)
-            doc.add_heading(f'{hn}. Detailed Report',1).bold = True
-            for k,v in detailed_report.items():
-                hn = ahn(hn,2)
-                doc.add_heading(f'{hn}. {k}',2)
-                line_space(doc,15)
+    if bool(list(detailed_report.values())[0])==True:
+        hn = ahn(hn,1)
+        doc.add_heading(f'{hn}. Detailed Report',1).bold = True
+        for k,v in detailed_report.items():
+            hn = ahn(hn,2)
+            doc.add_heading(f'{hn}. {k}',2)
+            line_space(doc,1)
+            for table in v:
+                overall_summary_df = pd.read_csv(table)
+                add_table_to_document(overall_summary_df,doc)
                 p = doc.add_paragraph()
-                p.add_run(f'{v[0]}', style = 'BigText').bold = True
-                format = p.paragraph_format
-                format.alignment = docx.enum.text.WD_ALIGN_PARAGRAPH.CENTER
-                # line_space(doc,1)
-                doc.add_page_break()
-                for table in v[1]:
-                    overall_summary_df = pd.read_csv(table)
-                    add_table_to_document(overall_summary_df,doc)
-                    p = doc.add_paragraph()
-                    p.style = None
-                    p.add_run(style = None)
-                    p.add_run(style = None)
-                    doc.add_page_break()
-    try:
-        add_inspection_details_to_doc(rf'Files\Inspection\{inspection_type}\text.txt',doc,hn)
-    except:
-        pass
+                p.style = None
+                p.add_run(style = None)
+                p.add_run(style = None)
+
+    add_inspection_details_to_doc(rf'Files\Inspection\{inspection_type}\text.txt',doc,hn)
 
     return doc
